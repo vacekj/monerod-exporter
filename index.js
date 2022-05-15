@@ -66,7 +66,9 @@ const syncPercentageMetric = new Gauge({
 });
 
 async function getSyncStatus(daemon) {
-  const { height, targetHeight } = (await daemon.getSyncInfo()).state;
+  const syncInfo = await daemon.getSyncInfo();
+  const targetHeight = parseInt(syncInfo.getTargetHeight()._d[0])
+  const height = syncInfo.getHeight();
   if (targetHeight > height) {
     return (height / targetHeight) * 100;
   }
@@ -74,12 +76,12 @@ async function getSyncStatus(daemon) {
 }
 
 async function getMetrics(daemon) {
-  const lastBlockHeader = (await daemon.getLastBlockHeader()).state;
+  // const lastBlockHeader = (await daemon.getLastBlockHeader()).state;
   const info = (await daemon.getInfo()).state;
   const peerBans = await daemon.getPeerBans();
   const miningStatus = (await daemon.getMiningStatus()).state;
   const syncPercentage = await getSyncStatus(daemon);
-  return { lastBlockHeader, info, peerBans, miningStatus, syncPercentage };
+  return {lastBlockHeader: {reward: 0}, info, peerBans, miningStatus, syncPercentage};
 }
 
 async function main() {
@@ -89,12 +91,12 @@ async function main() {
     getMetrics(daemon)
       .then(
         async ({
-          lastBlockHeader,
-          info,
-          peerBans,
-          miningStatus,
-          syncPercentage,
-        }) => {
+                 lastBlockHeader,
+                 info,
+                 peerBans,
+                 miningStatus,
+                 syncPercentage,
+               }) => {
           difficulty.set(Number(info.difficulty));
           incomingConnections.set(Number(info.numIncomingConnections));
           outgoingConnections.set(Number(info.numOutgoingConnections));
@@ -119,6 +121,7 @@ async function main() {
       });
   });
 }
+
 main();
 
 module.exports = app;
