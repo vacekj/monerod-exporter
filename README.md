@@ -16,6 +16,7 @@ Prometheus Exporter for the monero daemon (`monerod`)
 * monerod_tx_chain
 * monerod_tx_mempool
 * monerod_update_available
+
 ## Environement Variables
 * PORT (default 18083)
 * DAEMON_HOST (default http://127.0.0.1:18081)
