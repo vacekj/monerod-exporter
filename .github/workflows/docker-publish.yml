@@ -47,5 +47,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: hundehausen/monerod-exporter:latest
+          tags: vacekj/monerod-exporter:latest
 
