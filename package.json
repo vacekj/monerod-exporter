@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hundehausen/monerod-exporter.git"
+    "url": "git+https://github.com/vacekj/monerod-exporter.git"
   },
   "keywords": [
     "monerod",
@@ -16,12 +16,12 @@
     "exporter",
     "monerod-exporter"
   ],
-  "author": "hundehausen",
+  "author": "vacekj",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/hundehausen/monerod-exporter/issues"
+    "url": "https://github.com/vacekj/monerod-exporter/issues"
   },
-  "homepage": "https://github.com/hundehausen/monerod-exporter#readme",
+  "homepage": "https://github.com/vacekj/monerod-exporter#readme",
   "dependencies": {
     "express": "^4.18.0",
     "monero-javascript": "^0.7.0",

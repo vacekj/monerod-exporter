@@ -81,7 +81,7 @@ async function getMetrics(daemon) {
   const peerBans = await daemon.getPeerBans();
   const miningStatus = (await daemon.getMiningStatus()).state;
   const syncPercentage = await getSyncStatus(daemon);
-  return {lastBlockHeader: {reward: 0}, info, peerBans, miningStatus, syncPercentage};
+  return { lastBlockHeader: { reward: 0 }, info, peerBans, miningStatus, syncPercentage };
 }
 
 async function main() {
@@ -91,12 +91,12 @@ async function main() {
     getMetrics(daemon)
       .then(
         async ({
-                 lastBlockHeader,
-                 info,
-                 peerBans,
-                 miningStatus,
-                 syncPercentage,
-               }) => {
+          lastBlockHeader,
+          info,
+          peerBans,
+          miningStatus,
+          syncPercentage,
+        }) => {
           difficulty.set(Number(info.difficulty));
           incomingConnections.set(Number(info.numIncomingConnections));
           outgoingConnections.set(Number(info.numOutgoingConnections));
