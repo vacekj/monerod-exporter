@@ -67,7 +67,7 @@ const syncPercentageMetric = new Gauge({
 
 async function getSyncStatus(daemon) {
   const syncInfo = await daemon.getSyncInfo();
-  const targetHeight = parseInt(syncInfo.getTargetHeight()._d[0])
+  const targetHeight = parseInt(syncInfo.getTargetHeight()._d[0]);
   const height = syncInfo.getHeight();
   if (targetHeight > height) {
     return (height / targetHeight) * 100;
@@ -81,7 +81,13 @@ async function getMetrics(daemon) {
   const peerBans = await daemon.getPeerBans();
   const miningStatus = (await daemon.getMiningStatus()).state;
   const syncPercentage = await getSyncStatus(daemon);
-  return { lastBlockHeader: { reward: 0 }, info, peerBans, miningStatus, syncPercentage };
+  return {
+    lastBlockHeader: { reward: 0 },
+    info,
+    peerBans,
+    miningStatus,
+    syncPercentage,
+  };
 }
 
 async function main() {
